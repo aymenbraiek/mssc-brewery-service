@@ -1,6 +1,8 @@
 package com.biat.msscbreweryservice.Controller;
 
+import com.biat.msscbreweryservice.Boostrap.BeerLoader;
 import com.biat.msscbreweryservice.model.BeerDto;
+import com.biat.msscbreweryservice.model.BeerStyleEnum;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,10 +12,11 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import java.math.BigDecimal;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
-@WebMvcTest
+@WebMvcTest(BeerController.class)
 class BeerControllerTest {
     @Autowired
     MockMvc mockMvc;
@@ -39,11 +42,14 @@ class BeerControllerTest {
 
     @Test
     void updateBeerById() throws Exception {
+
         BeerDto beerDto=BeerDto.builder().build();
+
         String beerDtoJson=objectMapper.writeValueAsString(beerDto);
-        mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/beer"+UUID.randomUUID().toString())
+        mockMvc.perform(MockMvcRequestBuilders.put("/api/v1/beer/"+ UUID.randomUUID())
                 .accept(MediaType.APPLICATION_JSON)
                 .content(beerDtoJson))
                 .andExpect(MockMvcResultMatchers.status().isNoContent());
     }
+
 }

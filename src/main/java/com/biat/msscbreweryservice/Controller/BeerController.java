@@ -22,10 +22,12 @@ public class BeerController {
         return new ResponseEntity(HttpStatus.CREATED);
     }
 
-    @PutMapping("/{beerId}")
-    public ResponseEntity updateBeerById(@PathVariable("beerId") UUID beerId,@RequestBody BeerDto beerDto)
+    @PutMapping({"/{beerId}"})
+    public ResponseEntity updateBeerById(@PathVariable("beerId") UUID beerId, BeerDto beerDto)
     {
+
         return  new ResponseEntity(HttpStatus.NO_CONTENT);
+
     }
 
 
