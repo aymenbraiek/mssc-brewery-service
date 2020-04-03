@@ -4,8 +4,10 @@ import com.biat.msscbreweryservice.model.BeerDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.UUID;
 
 @RequestMapping("/api/v1/beer")
@@ -18,12 +20,12 @@ public class BeerController {
     }
 
     @PostMapping
-    public ResponseEntity createNewBeer(BeerDto beerDto) {
+    public ResponseEntity createNewBeer(@Validated @RequestBody BeerDto beerDto) {
         return new ResponseEntity(HttpStatus.CREATED);
     }
 
     @PutMapping({"/{beerId}"})
-    public ResponseEntity updateBeerById(@PathVariable("beerId") UUID beerId, BeerDto beerDto)
+    public ResponseEntity updateBeerById(@PathVariable("beerId") UUID beerId,@Validated @RequestBody BeerDto beerDto)
     {
 
         return  new ResponseEntity(HttpStatus.NO_CONTENT);
