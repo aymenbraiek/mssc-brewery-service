@@ -19,9 +19,9 @@ public class BeerLoader implements CommandLineRunner {
     public void run(String... args) throws Exception {
         loadBeerObject();
     }
-    private  void loadBeerObject(){
-        if(beerRepository.count()==0)
-        {
+
+    private void loadBeerObject() {
+        if (beerRepository.count() == 0) {
             beerRepository.save(Beer.builder()
                     .beerName("beer1")
                     .beerStyle("style1")
@@ -39,7 +39,7 @@ public class BeerLoader implements CommandLineRunner {
                     .minOnhand(11)
                     .build());
         }
-        System.out.println("beer load"+beerRepository.count());
+        System.out.println("beer load" + beerRepository.count());
         //System.out.println("beer load"+beerRepository.count());
     }
 
