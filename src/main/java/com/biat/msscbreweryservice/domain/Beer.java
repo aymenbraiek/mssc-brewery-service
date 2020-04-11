@@ -36,7 +36,7 @@ public class Beer {
     private Integer minOnhand;
     private Integer quantityOnHand;
     @Column(unique = true)
-    private Long upc;
+    private String upc;
 
 
 
