@@ -3,16 +3,15 @@ package com.biat.msscbreweryservice.Controller;
 import com.biat.msscbreweryservice.model.BeerDto;
 import com.biat.msscbreweryservice.services.BeerService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
+
 import org.springframework.http.ResponseEntity;
 
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import sun.net.httpserver.HttpsServerImpl;
 
-import javax.validation.Valid;
+
 import java.util.UUID;
 
 @RequiredArgsConstructor
