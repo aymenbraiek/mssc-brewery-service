@@ -4,9 +4,9 @@ import com.biat.msscbreweryservice.domain.Beer;
 import com.biat.msscbreweryservice.model.BeerDto;
 import org.mapstruct.Mapper;
 
-@Mapper(uses = DateMapper.class)
+@Mapper(uses = {DateMapper.class})
 public interface BeerMapper {
 
     BeerDto beerToBeerDto(Beer beer);
-    Beer beerDtoToBeer(BeerDto beerDto);
+    Beer beerDtoToBeer(BeerDto dto);
 }
