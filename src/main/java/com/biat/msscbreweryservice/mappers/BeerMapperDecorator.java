@@ -22,6 +22,7 @@ public class BeerMapperDecorator  implements BeerMapper{
 
     @Override
     public BeerDto beerToBeerDto(Beer beer) {
+
         return mapper.beerToBeerDto(beer);
     }
 
