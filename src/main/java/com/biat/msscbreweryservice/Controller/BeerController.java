@@ -6,6 +6,7 @@ import com.biat.msscbreweryservice.model.BeerStyleEnum;
 import com.biat.msscbreweryservice.services.BeerService;
 import lombok.RequiredArgsConstructor;
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 
@@ -25,6 +26,7 @@ public class BeerController {
     private static final Integer DEFAULT_PAGE_SIZE = 25;
 
     private final BeerService beerService;
+
 
     @GetMapping(produces = {"application/json"}, path = "beer")
     public ResponseEntity<BeerPageList> listBeers(@RequestParam(value = "pageNumber", required = false) Integer pageNumber,
@@ -51,13 +53,14 @@ public class BeerController {
 
 
     @GetMapping("/{beerId}")
+    @Cacheable(cacheNames = "beerCache", key = "#beerId", condition = "#showInventoryOnHand == false ")
     public ResponseEntity<BeerDto> getBeerById(@PathVariable("beerId") UUID beerId
             , @RequestParam(value = "showInventoryOnHand", required = false) Boolean showInventoryOnHand) {
         System.out.println(beerId);
         if (showInventoryOnHand == null) {
             showInventoryOnHand = false;
         }
-        return new ResponseEntity<>(beerService.getById(beerId,showInventoryOnHand), HttpStatus.OK);
+        return new ResponseEntity<>(beerService.getById(beerId, showInventoryOnHand), HttpStatus.OK);
     }
 
     @PostMapping

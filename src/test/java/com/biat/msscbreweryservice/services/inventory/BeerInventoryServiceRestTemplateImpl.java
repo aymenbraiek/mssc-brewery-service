@@ -12,7 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.UUID;
 
 
-//@Disabled // utility for manual testing
+@Disabled // utility for manual testing
 @SpringBootTest
 public class BeerInventoryServiceRestTemplateImpl{
     @Autowired
