@@ -52,7 +52,7 @@ public class BeerController {
     }
 
 
-    @GetMapping("/{beerId}")
+    @GetMapping("beer/{beerId}")
     @Cacheable(cacheNames = "beerCache", key = "#beerId", condition = "#showInventoryOnHand == false ")
     public ResponseEntity<BeerDto> getBeerById(@PathVariable("beerId") UUID beerId
             , @RequestParam(value = "showInventoryOnHand", required = false) Boolean showInventoryOnHand) {
@@ -61,6 +61,11 @@ public class BeerController {
             showInventoryOnHand = false;
         }
         return new ResponseEntity<>(beerService.getById(beerId, showInventoryOnHand), HttpStatus.OK);
+    }
+
+    @GetMapping("beerUpc/{upc}")
+    public ResponseEntity<BeerDto> getBeerByUpc(@PathVariable("upc") String upc) {
+        return new ResponseEntity<>(beerService.getByUpc(upc), HttpStatus.OK);
     }
 
     @PostMapping
