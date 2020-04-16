@@ -15,13 +15,13 @@ import java.util.Objects;
 import java.util.UUID;
 
 @Slf4j
-@ConfigurationProperties(prefix = "com.biat.springframework", ignoreUnknownFields = false)
+@ConfigurationProperties(prefix = "com.biat", ignoreUnknownFields = false)
 @Component
 public class BeerInventoryServiceRestTemplateImpl implements BeerInventoryService {
     private final String INVENTORY_PATH = "/api/v1/beer/{beerId}/inventory";
     private final RestTemplate restTemplate;
 
-    private String beerInventoryServiceHost="http://localhost:8082";
+    private String beerInventoryServiceHost;
 
     public void setBeerInventoryServiceHost(String beerInventoryServiceHost) {
         this.beerInventoryServiceHost = beerInventoryServiceHost;
