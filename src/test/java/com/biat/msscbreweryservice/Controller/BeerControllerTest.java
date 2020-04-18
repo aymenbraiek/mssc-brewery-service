@@ -39,8 +39,8 @@ class BeerControllerTest {
     @Test
     void getBeerById() throws Exception {
         BDDMockito.given(beerService.getById(any(),anyBoolean())).willReturn(getValiderBeerDto());
-        mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/beer" + UUID.randomUUID().toString()
-        ).accept(MediaType.APPLICATION_JSON)).andExpect(MockMvcResultMatchers.status().isOk());
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/beer/" + UUID.randomUUID().toString())
+                .accept(MediaType.APPLICATION_JSON)).andExpect(MockMvcResultMatchers.status().isOk());
 
     }
 
@@ -54,7 +54,6 @@ class BeerControllerTest {
         mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/beer/")
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType("application/json")
-
                 .content(beerDtoJson))
                 .andExpect(MockMvcResultMatchers.status().isCreated());
     }

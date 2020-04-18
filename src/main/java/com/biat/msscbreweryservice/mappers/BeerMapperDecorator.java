@@ -5,7 +5,8 @@ import com.biat.msscbreweryservice.model.BeerDto;
 import com.biat.msscbreweryservice.services.inventory.BeerInventoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class BeerMapperDecorator  implements BeerMapper{
+
+public abstract class BeerMapperDecorator implements BeerMapper {
     private BeerInventoryService beerInventoryService;
     private BeerMapper mapper;
 
@@ -30,7 +31,7 @@ public class BeerMapperDecorator  implements BeerMapper{
     public BeerDto beerToBeerDtoWithInventory(Beer beer) {
         BeerDto dto = mapper.beerToBeerDto(beer);
         dto.setQuantityOnHand(beerInventoryService.getOnhandInventory(beer.getId()));
-        System.out.println("beerDto"+dto);
+        System.out.println("beerDto" + dto);
         return dto;
     }
 

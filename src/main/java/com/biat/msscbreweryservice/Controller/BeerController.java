@@ -48,7 +48,7 @@ public class BeerController {
 
         BeerPageList beerList = beerService.listBeers(beerName, beerStyle, PageRequest.of(pageNumber, pageSize), showInventoryOnHand);
 
-        return new ResponseEntity<>(beerList, HttpStatus.OK);
+        return new ResponseEntity(beerList, HttpStatus.OK);
     }
 
 
@@ -60,7 +60,7 @@ public class BeerController {
         if (showInventoryOnHand == null) {
             showInventoryOnHand = false;
         }
-        return new ResponseEntity<>(beerService.getById(beerId, showInventoryOnHand), HttpStatus.OK);
+        return new ResponseEntity(beerService.getById(beerId, showInventoryOnHand), HttpStatus.OK);
     }
 
     @GetMapping("beerUpc/{upc}")
@@ -68,14 +68,14 @@ public class BeerController {
         return new ResponseEntity<>(beerService.getByUpc(upc), HttpStatus.OK);
     }
 
-    @PostMapping
+    @PostMapping("/beer")
     public @ResponseBody
     ResponseEntity createNewBeer(@RequestBody @Validated BeerDto beerDto) {
 
         return new ResponseEntity<>(beerService.saveBeer(beerDto), HttpStatus.CREATED);
     }
 
-    @PutMapping({"/{beerId}"})
+    @PutMapping({"beer/{beerId}"})
     public @ResponseBody
     ResponseEntity updateBeerById(@PathVariable("beerId") UUID beerId, @RequestBody @Validated BeerDto beerDto) {
 
