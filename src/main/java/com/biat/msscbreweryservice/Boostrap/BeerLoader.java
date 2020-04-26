@@ -3,12 +3,14 @@ package com.biat.msscbreweryservice.Boostrap;
 import com.biat.msscbreweryservice.Repository.BeerRepository;
 import com.biat.msscbreweryservice.domain.Beer;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import java.math.BigDecimal;
 
 @RequiredArgsConstructor
 @Component
+@Slf4j
 public class BeerLoader implements CommandLineRunner {
     private final BeerRepository beerRepository;
     public static final String BEER_1_UPC = "0631234200036";
@@ -50,7 +52,7 @@ public class BeerLoader implements CommandLineRunner {
                     .minOnhand(111)
                     .build());
         }
-        System.out.println("beer load" + beerRepository.count());
+        log.debug("beer load" + beerRepository.count());
 
 
     }

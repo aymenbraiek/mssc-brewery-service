@@ -1,4 +1,5 @@
 package com.biat.msscbreweryservice.services;
+
 import com.biat.msscbreweryservice.Repository.BeerRepository;
 import com.biat.msscbreweryservice.domain.Beer;
 import com.biat.msscbreweryservice.mappers.BeerMapper;
@@ -6,14 +7,17 @@ import com.biat.msscbreweryservice.model.BeerDto;
 import com.biat.msscbreweryservice.model.BeerPageList;
 import com.biat.msscbreweryservice.model.BeerStyleEnum;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
+
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class BeerServiceImpl implements BeerService {
@@ -21,28 +25,28 @@ public class BeerServiceImpl implements BeerService {
 
     private final BeerRepository beerRepository;
     private final BeerMapper beerMapper;
+
     @Cacheable(cacheNames = "beerListCache", condition = "#showInventoryOnHand == false ")
     @Override
     public BeerPageList listBeers(String beerName, BeerStyleEnum beerStyle, PageRequest pageRequest, Boolean showInventoryOnHand) {
-        System.out.println("called this method");
+
         BeerPageList beerPagedList;
         Page<Beer> beerPage;
 
         if (!StringUtils.isEmpty(beerName) && !StringUtils.isEmpty(beerStyle)) {
             //search both
-            System.out.println("if 1");
+
             beerPage = beerRepository.findAllByBeerNameAndBeerStyle(beerName, beerStyle, pageRequest);
         } else if (!StringUtils.isEmpty(beerName) && StringUtils.isEmpty(beerStyle)) {
             //search beer_service name
             beerPage = beerRepository.findAllByBeerName(beerName, pageRequest);
-            System.out.println("if 2");
+
         } else if (StringUtils.isEmpty(beerName) && !StringUtils.isEmpty(beerStyle)) {
             //search beer_service style
-            System.out.println("if 3");
+
             beerPage = beerRepository.findAllByBeerStyle(beerStyle, pageRequest);
         } else {
-            System.out.println("if 4");
-            System.out.println("if 4"+pageRequest);
+
             beerPage = beerRepository.findAll(pageRequest);
         }
         if (showInventoryOnHand) {
@@ -69,6 +73,7 @@ public class BeerServiceImpl implements BeerService {
 
         return beerPagedList;
     }
+
     @Cacheable(cacheNames = "beerCacheUpc")
     @Override
     public BeerDto getByUpc(String upc) {
