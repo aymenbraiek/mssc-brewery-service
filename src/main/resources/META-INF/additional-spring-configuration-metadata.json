@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "com.biat-mssc-beer-inventory-service",
+      "type": "java.lang.String",
+      "description": "Description for com.biat-mssc-beer-inventory-service."
+  }
+] }

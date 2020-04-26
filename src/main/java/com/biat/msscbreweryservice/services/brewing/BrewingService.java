@@ -1,4 +1,4 @@
-package com.biat.msscbreweryservice.services;
+package com.biat.msscbreweryservice.services.brewing;
 
 import com.biat.msscbreweryservice.Repository.BeerRepository;
 import com.biat.msscbreweryservice.config.JmsConfig;
